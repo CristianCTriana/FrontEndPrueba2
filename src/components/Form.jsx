@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Button, InputLabel, MenuItem, Select, Slider, Input, Grid } from '@mui/material';
+import { Button, InputLabel, MenuItem, Select, Slider, Input, Grid, FormControl } from '@mui/material';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
@@ -19,12 +19,16 @@ export default function FormPage(){
             ...input,
             [event.target.name]: event.target.value
         })
+        console.log(input)
     }
 
     function sendData(event){
         event.preventDefault();
+        const headers = {
+            "Content-Type": "application/json"
+          };
         async function post(){
-            var json = await axios.post('http://localhost:3001/data/create',input)
+            var json = await axios.post('http://localhost:3001/data/create',input,headers)
         }
         post();
         setInput({
@@ -53,7 +57,7 @@ export default function FormPage(){
                         </div>
                         <div>
                             <label className='label'>Numero de telefono</label>
-                            <Input type='number' onChange={handleChange} name='number' value={input.number}></Input>
+                            <Input type='text' onChange={handleChange} name='number' value={input.number}></Input>
                         </div>
                     </div>
                 </Grid>
@@ -62,14 +66,17 @@ export default function FormPage(){
                         <span className='tittles'>Datos de la materia</span>
                         <div>
                             <div className='label2'>¿En qué asignatura necesitas ayuda para tu PARICAL o QUIZ?</div>
-                                <Select class='select'
+                                
+                                <FormControl fullWidth>
+                                    <Select class='select'
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
                                     value={input.materia}
                                     label="Select..."
                                     onChange={handleChange}
                                     name='materia'
-                                >
+                                    >
+                                <MenuItem value="">Selecciona una opción</MenuItem>
                                 <MenuItem value={'ingles'}>Inglés</MenuItem>
                                 <MenuItem value={'calculo'}>Cálculo</MenuItem>
                                 <MenuItem value={'geometria'}>Geometría</MenuItem>
@@ -85,7 +92,8 @@ export default function FormPage(){
                                 <MenuItem value={'estadistica general'}>Estadística general  </MenuItem>
                                 <MenuItem value={'sistemas de la informacion'}>Sistemas de información</MenuItem>
                                 <MenuItem value={'pensamiento sistematico'}>Pensamiento sistémico</MenuItem>
-                            </Select>
+                                </Select>
+                            </FormControl>
                         </div>
                         <div>
                             <div className='label2'>¿Cuántos MINUTOS dura tu PARCIAL o QUIZ?</div>
