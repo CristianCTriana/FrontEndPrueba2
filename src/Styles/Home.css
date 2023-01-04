@@ -1,0 +1,27 @@
+.imagen{
+    margin-top: 7%;
+    margin-bottom: 5%;
+}
+
+.text1{
+    color: #ffbc00;
+    font-size: 25px;
+    margin-bottom: 5%;
+}
+
+.text2{
+    font-size: 15px;
+    width: 70%;
+    margin-left: 15%;
+}
+
+.homeButton{
+    background-color: #ffbc00;
+    margin-top: 5px;
+    margin-bottom: 30%;
+    border: none;
+    box-shadow: 1px 2px 5px grey;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+}
